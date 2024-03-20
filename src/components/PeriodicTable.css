@@ -1,0 +1,78 @@
+/* PeriodicTable.css */
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 5px;
+    padding: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; 
+}
+
+.element {
+    padding: 10px;
+    border: 1px solid #aaa;
+    background-color: rgba(245, 245, 245, 0.762);
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative; 
+}
+
+.element:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.symbol {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.name {
+    font-size: 0.5em;
+    margin-top: 5px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.period,
+.group {
+    position: absolute;
+    font-size: 0.4em;
+    bottom: 2px;
+    left: 2px; 
+    color: #555; 
+}
+
+
+/* Colors for different element groups */
+.alkali-metal { background-color: #FF5733; } /* Bright orange */
+.alkaline-earth-metal { background-color: #FFC300; } /* Yellow */
+.transition-metal { background-color: #3498DB; } /* Blue */
+.lanthanoid { background-color: #9B59B6; } /* Purple */
+.actinoid { background-color: #E74C3C; } /* Red */
+.nonmetal { background-color: #2ECC71; } /* Green */
+.metalloid { background-color: #F39C12; } /* Orange */
+.post-transition-metal { background-color: #E67E22; } /* Dark orange */
+.halogen { background-color: #3498DB; } /* Blue */
+.noble-gas { background-color: #1ABC9C; } /* Turquoise */
+.metal { background-color: #95a5a6; } /*grey*/
+
+.element-legend {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .element-color {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+  }
