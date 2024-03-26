@@ -11,7 +11,7 @@ function App() {
         <header className="App-header">
           <Routes>
             <Route path="/" exact element={<PeriodicTable />} />
-            <Route path="/element/:atomicNumber" element={<ElementDetail />} />
+            <Route path="/elements/:atomicNumber" element={<ElementDetail />} />
 
           </Routes>
         </header>

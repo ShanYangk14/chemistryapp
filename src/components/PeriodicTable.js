@@ -9,47 +9,73 @@ const PeriodicTable = () => {
   useEffect(() => {
     fetch('/data.json')
       .then(response => response.json())
-      .then(data => setElements(data))
+      .then(data => setElements(data.elements))
       .catch(error => console.error('Error fetching data:', error));
   }, []);  
 
-  const handleClick = (atomicNumber) => {
-    console.log('Atomic number clicked:', atomicNumber);
-    navigate(`/element/${atomicNumber}`);
+  const handleClick = (number) => {
+    console.log('Atomic number clicked:', number);
+    navigate(`/element/${number}`);
+  };
+
+  const getCategoryColor = (category) => {
+    switch (category.toLowerCase()) {
+      case 'alkali metal':
+        return 'category-alkali-metal';
+      case 'alkaline earth metal':
+        return 'category-alkaline-earth-metal';
+      case 'transition metal':
+        return 'category-transition-metal';
+      case 'lanthanide':
+        return 'category-lanthanide';
+      case 'actinide':
+        return 'category-actinide';
+      case 'diatomic nonmetal':
+        return 'category-diatomic-nonmetal';
+      case 'metalloid':
+        return 'category-metalloid';
+      case 'post-transition metal':
+        return 'category-post-transition-metal';
+      case 'noble gas':
+        return 'category-noble-gas';
+      case 'polyatomic nonmetal':
+        return 'category-polyatomic-nonmetal';
+      default:
+        return 'category-unknown';
+    }
   };
 
   return (
     <div>
-      <fieldset className="element-legend">
-        <legend>Colors for different element groups</legend>
-        <div className="element-color alkali-metal">Alkali Metal</div>
-        <div className="element-color alkaline-earth-metal">Alkaline Earth Metal</div>
-        <div className="element-color transition-metal">Transition Metal</div>
-        <div className="element-color lanthanoid">Lanthanoid</div>
-        <div className="element-color actinoid">Actinoid</div>
-        <div className="element-color nonmetal">Nonmetal</div>
-        <div className="element-color metalloid">Metalloid</div>
-        <div className="element-color post-transition-metal">Post-Transition Metal</div>
-        <div className="element-color halogen">Halogen</div>
-        <div className="element-color noble-gas">Noble Gas</div>
-        <div className="element-color metal">Metal</div>
-      </fieldset>
+       <fieldset className="element-legend">
+         <legend>Colors for different element category</legend>
+         <div className="element-color category-alkali-metal">Alkali Metal</div>
+         <div className="element-color category-alkaline-earth-metal">Alkaline Earth Metal</div>
+         <div className="element-color category-transition-metal">Transition Metal</div>
+         <div className="element-color category-lanthanide">Lanthanide</div>
+         <div className="element-color category-actinide">Actinide</div>
+         <div className="element-color category-diatomic-nonmetal">Diatomic Nonmetal</div>
+         <div className="element-color category-metalloid">Metalloid</div>
+         <div className="element-color category-post-transition-metal">Post-Transition Metal</div>
+         <div className="element-color category-noble-gas">Noble Gas</div>
+         <div className="element-color category-polyatomic-nonmetal">Polyatomic Nonmetal</div>
+         <div className="element-color category-unknown">Unknown</div>
+       </fieldset>
 
-      <div className="periodic-table">
-        {elements.map(element => (
-          <div
-            className={`element ${element.groupBlock.toLowerCase().replace(/\s+/g, '-')}`}
-            key={element.atomicNumber}
-            style={{ gridRow: element.period, gridColumn: element.group }}
-            onClick={() => handleClick(element.atomicNumber)}
-          >
-            <span className="symbol">{element.symbol}</span>
-            <span className="name">{element.name}</span>
-            <span className="period">{element.period}</span>
-            <span className="group">{element.group}</span>
-          </div>
-        ))}
-      </div>
+       <div className="periodic-table">
+         {Array.isArray(elements) && elements.map(element => (
+           <div
+             className={`element ${element.category.toLowerCase().startsWith('unknown') ? 'category-unknown' : getCategoryColor(element.category)}`}
+             key={element.number}
+             style={{ gridArea: `${element.ypos} / ${element.xpos}` }}
+             onClick={() => handleClick(element.number)}
+           >
+             <span className="number">{element.number}</span>
+             <span className="symbol">{element.symbol}</span>
+             <span className="name">{element.name}</span>
+           </div>
+         ))}
+       </div>
     </div>
   );
 };

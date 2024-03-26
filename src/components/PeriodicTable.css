@@ -1,78 +1,99 @@
 /* PeriodicTable.css */
-.periodic-table {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 5px;
+.element-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative; 
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
 }
 
+.element-legend div {
+    margin: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}
+/* Define the grid layout for the periodic table */
+.periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr); /* Assuming 18 columns for the periodic table */
+    grid-auto-rows: 100px; /* Set a fixed size for each grid row */
+    gap: 10px; /* Increased gap for better separation */
+    padding: 5px; /* Decreased padding */
+    max-width: 1200px; /* Keep max-width to limit the size */
+    margin: 0 auto;
+    position: relative;
+    overflow: auto; /* Allow scrolling for overflow */
+}
+
+/* Style for each element in the periodic table */
 .element {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px; /* Adjusted padding */
     border: 1px solid #aaa;
-    background-color: rgba(245, 245, 245, 0.762);
     text-align: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    position: relative; 
+    position: relative;
+    word-wrap: break-word; /* Allow long element names to wrap */
 }
 
+/* Hover effect for elements */
 .element:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for the element symbol */
 .symbol {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1em; /* Adjusted font size */
 }
 
+/* Style for the element name */
 .name {
-    font-size: 0.5em;
-    margin-top: 5px;
+    font-size: 0.4em; /* Adjusted font size */
+    margin-top: 5px; /* Adjusted margin */
     color: #555;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+/* Style for the period and group */
 .period,
 .group {
     position: absolute;
-    font-size: 0.4em;
+    font-size: 0.3em; /* Adjusted font size */
     bottom: 2px;
-    left: 2px; 
-    color: #555; 
+    left: 2px;
+    color: #555;
 }
 
+.category-alkali-metal { background-color: #FFD700; } /* Golden */
+.category-alkaline-earth-metal { background-color: #6495ED; } /* Cornflower Blue */
+.category-transition-metal { background-color: #CD5C5C; } /* Indian Red */
+.category-lanthanide { background-color: #32CD32; } /* Lime Green */
+.category-actinide { background-color: #8A2BE2; } /* Blue Violet */
+.category-diatomic-nonmetal { background-color: #FF6347; } /* Tomato */
+.category-metalloid { background-color: #FFA500; } /* Orange */
+.category-post-transition-metal { background-color: #00CED1; } /* Dark Turquoise */
+.category-noble-gas { background-color: #d2d222; } /* Yellow */
+.category-polyatomic-nonmetal { background-color: #8B008B; } /* Dark Magenta */
+.category-unknown { background-color: #966C90; } /* Purple Taupe */
 
-/* Colors for different element groups */
-.alkali-metal { background-color: #FF5733; } /* Bright orange */
-.alkaline-earth-metal { background-color: #FFC300; } /* Yellow */
-.transition-metal { background-color: #3498DB; } /* Blue */
-.lanthanoid { background-color: #9B59B6; } /* Purple */
-.actinoid { background-color: #E74C3C; } /* Red */
-.nonmetal { background-color: #2ECC71; } /* Green */
-.metalloid { background-color: #F39C12; } /* Orange */
-.post-transition-metal { background-color: #E67E22; } /* Dark orange */
-.halogen { background-color: #3498DB; } /* Blue */
-.noble-gas { background-color: #1ABC9C; } /* Turquoise */
-.metal { background-color: #95a5a6; } /*grey*/
 
-.element-legend {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .element-color {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 14px;
-  }
+.number {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 0.6em;
+}
