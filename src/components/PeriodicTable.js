@@ -4,6 +4,7 @@ import './PeriodicTable.css';
 
 const PeriodicTable = () => {
   const [elements, setElements] = useState([]);
+  const [hoveredElement, setHoveredElement] = useState(null)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +17,10 @@ const PeriodicTable = () => {
   const handleClick = (number) => {
     console.log('Atomic number clicked:', number);
     navigate(`/element/${number}`);
+    const hovered = elements.find(element => element.number === number);
+    setHoveredElement(hovered);
   };
+
 
   const getCategoryColor = (category) => {
     switch (category.toLowerCase()) {
@@ -63,19 +67,35 @@ const PeriodicTable = () => {
        </fieldset>
 
        <div className="periodic-table">
-         {Array.isArray(elements) && elements.map(element => (
-           <div
-             className={`element ${element.category.toLowerCase().startsWith('unknown') ? 'category-unknown' : getCategoryColor(element.category)}`}
-             key={element.number}
-             style={{ gridArea: `${element.ypos} / ${element.xpos}` }}
-             onClick={() => handleClick(element.number)}
-           >
-             <span className="number">{element.number}</span>
-             <span className="symbol">{element.symbol}</span>
-             <span className="name">{element.name}</span>
-           </div>
-         ))}
-       </div>
+        {Array.isArray(elements) && elements.map(element => (
+          <div
+            className={`element ${getCategoryColor(element.category)}`}
+            key={element.number}
+            style={{ gridArea: `${element.ypos} / ${element.xpos}` }}
+            onClick={() => handleClick(element.number)} 
+           
+          >
+            <span className="number">{element.number}</span>
+            <span className="symbol">{element.symbol}</span>
+            <span className="name">{element.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="element-info-panel">
+        {hoveredElement && (
+          <div>
+            <h2>{hoveredElement.name}</h2>
+            <p>Symbol: {hoveredElement.symbol}</p>
+            <p>Atomic Number: {hoveredElement.number}</p>
+            <p>Atomic Mass: {hoveredElement.atomic_mass}</p>
+            <p>Category: {hoveredElement.category}</p>
+            <p>Density: {hoveredElement.density}</p>
+            <p>Discovered By: {hoveredElement.discovered_by}</p>
+            <p>Phase: {hoveredElement.phase}</p>
+            <p>Summary: {hoveredElement.summary}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

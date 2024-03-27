@@ -97,3 +97,13 @@
     left: 5px;
     font-size: 0.6em;
 }
+.element-info-panel {
+    position: fixed;
+    top: 50%; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    transform: translateY(-50%);
+    /* Additional styling */
+}
+
+
+  
