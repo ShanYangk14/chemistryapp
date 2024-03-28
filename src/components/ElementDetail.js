@@ -1,13 +1,15 @@
+// ElementDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Canvas } from 'react-three-fiber'; 
+import AtomModel from './AtomModel';
 import './ElementDetail.css';
 
 const ElementDetail = () => {
   const [element, setElement] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { atomicNumber } = useParams();
-
-  console.log('Atomic number received:', atomicNumber);
 
   useEffect(() => {
     if (!atomicNumber) {
@@ -28,6 +30,7 @@ const ElementDetail = () => {
         if (!selectedElement) {
           console.error('Element not found for atomic number:', atomicNumber);
           setIsLoading(false);
+          setError('Element not found');
           return;
         }
         setElement(selectedElement);
@@ -36,11 +39,16 @@ const ElementDetail = () => {
       .catch(error => {
         console.error('Error fetching element details:', error);
         setIsLoading(false);
+        setError('Failed to fetch element details');
       });
   }, [atomicNumber]);
   
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   if (!element) {
@@ -58,7 +66,12 @@ const ElementDetail = () => {
       <p>Discovered By: {element.discovered_by}</p>
       <p>Phase: {element.phase}</p>
       <p>Summary: {element.summary}</p>
-      {/* Add other properties you want to display */}
+
+      <div className="canvas-container">
+        <Canvas>
+          <AtomModel /> 
+        </Canvas>
+      </div>
     </div>
   );
 };
