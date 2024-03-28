@@ -1,4 +1,3 @@
-// ElementDetail.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Canvas } from 'react-three-fiber'; 
@@ -57,6 +56,11 @@ const ElementDetail = () => {
 
   return (
     <div>
+      <div className="canvas-container">
+        <Canvas>
+          <AtomModel atomicNumber={atomicNumber} /> 
+        </Canvas>
+      </div>
       <h2>{element.name}</h2>
       <p>Symbol: {element.symbol}</p>
       <p>Atomic Number: {element.number}</p>
@@ -67,11 +71,6 @@ const ElementDetail = () => {
       <p>Phase: {element.phase}</p>
       <p>Summary: {element.summary}</p>
 
-      <div className="canvas-container">
-        <Canvas>
-          <AtomModel /> 
-        </Canvas>
-      </div>
     </div>
   );
 };
