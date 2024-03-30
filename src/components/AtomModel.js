@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useThree } from 'react-three-fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; // Import OrbitControls
 
 const AtomModel = ({ atomicNumber }) => {
-  const { camera, gl, scene } = useThree();
-  const [modelLoaded, setModelLoaded] = useState(false);
+  const { scene, camera, gl } = useThree(); // Destructure camera and gl
+  const [/*modelLoaded*/, setModelLoaded] = useState(false);
 
   useEffect(() => {
     if (!atomicNumber) return;
 
     const loader = new GLTFLoader();
     const modelPath = `/3Dmodels/element_${String(atomicNumber).padStart(3, '0')}_${getElementName(atomicNumber)}.glb`; // Dynamically construct the model path
+    let object = null;
+
     loader.load(
       modelPath,
       (gltf) => {
-        const object = gltf.scene;
+        object = gltf.scene;
 
         object.traverse((child) => {
           if (child.isMesh) {
             if (child.name.includes('element_001_hydrogen_nucleus.001')) {
-              child.material = new THREE.MeshStandardMaterial({ color: 0xff0000 }); 
+              child.material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
             } else if (child.name.includes('hydrogen_orbital_1.001')) {
-              child.material = new THREE.MeshStandardMaterial({ color: 0x0000ff }); 
+              child.material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
             }
           }
         });
@@ -39,6 +41,14 @@ const AtomModel = ({ atomicNumber }) => {
 
         setModelLoaded(true);
         console.log('Loaded GLTF model:', gltf);
+
+        // Start automatic rotation
+        const rotationSpeed = 0.01;
+        const animate = () => {
+          object.rotation.y += rotationSpeed;
+          requestAnimationFrame(animate);
+        };
+        animate();
       },
       undefined,
       (error) => {
@@ -46,31 +56,24 @@ const AtomModel = ({ atomicNumber }) => {
       }
     );
 
-    // Clean up function
-    return () => {
-      // Dispose controls
-      if (gl) {
-        const controls = new OrbitControls(camera, gl.domElement);
-        controls.dispose();
-      }
-    };
-  }, [atomicNumber, camera, gl, scene]);
-
-  useEffect(() => {
-    if (!modelLoaded) return;
-
+    // Create OrbitControls
     const controls = new OrbitControls(camera, gl.domElement);
-    controls.autoRotate = true; 
-    controls.autoRotateSpeed = 1; 
+    controls.enableDamping = true; // Optional: Enables smooth camera movement
+    controls.dampingFactor = 0.25; // Optional: Adjusts the damping factor
 
     // Clean up function
     return () => {
+      // Remove the model from the scene
+      if (object) {
+        scene.remove(object);
+      }
+
+      // Dispose OrbitControls
       controls.dispose();
     };
-  }, [camera, gl, modelLoaded]);
+  }, [atomicNumber, camera, gl.domElement, scene]);
 
   const getElementName = (atomicNumber) => {
-    // Element names mapping
     const elementNames = {
       1:'hydrogen',
       2:'helium',
@@ -194,9 +197,7 @@ const AtomModel = ({ atomicNumber }) => {
     return elementNames[atomicNumber] || ''; 
   };
 
-  return (
-    modelLoaded && <primitive object={scene} />
-  );
+  return null; // We don't render anything directly, as the model is added to the scene directly
 };
 
 export default AtomModel;

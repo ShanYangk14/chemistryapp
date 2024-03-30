@@ -9,6 +9,7 @@ const ElementDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { atomicNumber } = useParams();
+  const ElementGroup  = ["IA", "IIA", "IIIB", "IVB", "VB", "VIB", "VIIB", "VIIIB", "VIIIB", "VIIIB", "IB", "IIB", "IIIA", "IVA", "VA", "VIA", "VIIA", "VIIIA"]  
 
   useEffect(() => {
     if (!atomicNumber) {
@@ -62,15 +63,20 @@ const ElementDetail = () => {
         </Canvas>
       </div>
       <h2>{element.name}</h2>
-      <p>Symbol: {element.symbol}</p>
       <p>Atomic Number: {element.number}</p>
+      <p>Symbol: {element.symbol}</p>
+      <p>Electron Config Semantic: {element.electron_configuration_semantic}</p>
+      <p>Period: {element.period}</p>
+      <p>Group: {ElementGroup[(element.group % 18) + Math.floor(element.group / 18 ) - 1]}</p>
       <p>Atomic Mass: {element.atomic_mass}</p>
       <p>Category: {element.category}</p>
-      <p>Density: {element.density}</p>
-      <p>Discovered By: {element.discovered_by}</p>
       <p>Phase: {element.phase}</p>
+      <p>Density: {element.density}</p>
+      <p>Boil: {element.boil}</p>
+      <p>Melt: {element.melt}</p>
+      <p>Discovered By: {element.discovered_by}</p>
       <p>Summary: {element.summary}</p>
-
+      <p>More Info: <a href={element.source} target="_blank" rel="noopener noreferrer">Wikipedia</a></p>
     </div>
   );
 };
