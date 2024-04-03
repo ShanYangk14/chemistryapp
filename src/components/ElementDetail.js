@@ -56,27 +56,29 @@ const ElementDetail = () => {
   }
 
   return (
-    <div>
+    <div className="element-detail">
+      <div className="info">
+        <h2>{element.name}</h2>
+        <p><strong>Atomic Number:</strong> {element.number}</p>
+        <p><strong>Symbol:</strong> {element.symbol}</p>
+        <p><strong>Electron Config Semantic:</strong> {element.electron_configuration_semantic}</p>
+        <p><strong>Period:</strong> {element.period}</p>
+        <p><strong>Group:</strong> {ElementGroup[(element.group % 18) + Math.floor(element.group / 18) - 1]}</p>
+        <p><strong>Atomic Mass:</strong> {element.atomic_mass}</p>
+        <p><strong>Category:</strong> {element.category}</p>
+        <p><strong>Phase:</strong> {element.phase}</p>
+        <p><strong>Density:</strong> {element.density}</p>
+        <p><strong>Boil:</strong> {element.boil}</p>
+        <p><strong>Melt:</strong> {element.melt}</p>
+        <p><strong>Discovered By:</strong> {element.discovered_by}</p>
+        <p><strong>Summary:</strong> {element.summary}</p>
+        <p><strong>More Info:</strong> <a href={element.source} target="_blank" rel="noopener noreferrer">Wikipedia</a></p>
+      </div>
       <div className="canvas-container">
         <Canvas>
           <AtomModel atomicNumber={atomicNumber} /> 
         </Canvas>
       </div>
-      <h2>{element.name}</h2>
-      <p>Atomic Number: {element.number}</p>
-      <p>Symbol: {element.symbol}</p>
-      <p>Electron Config Semantic: {element.electron_configuration_semantic}</p>
-      <p>Period: {element.period}</p>
-      <p>Group: {ElementGroup[(element.group % 18) + Math.floor(element.group / 18 ) - 1]}</p>
-      <p>Atomic Mass: {element.atomic_mass}</p>
-      <p>Category: {element.category}</p>
-      <p>Phase: {element.phase}</p>
-      <p>Density: {element.density}</p>
-      <p>Boil: {element.boil}</p>
-      <p>Melt: {element.melt}</p>
-      <p>Discovered By: {element.discovered_by}</p>
-      <p>Summary: {element.summary}</p>
-      <p>More Info: <a href={element.source} target="_blank" rel="noopener noreferrer">Wikipedia</a></p>
     </div>
   );
 };

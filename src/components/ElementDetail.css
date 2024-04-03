@@ -1,11 +1,24 @@
 .element-detail {
+  display: flex;
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 20px;
-  max-width: 600px;
   margin: 20px auto;
+  max-width: 800px;
+}
+
+.info{
+  display: flex; 
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: flex-start;
+  text-align: left;
+}
+
+.element-detail .info {
+  flex: 1;
+  padding-right: 20px;
 }
 
 .element-detail h2 {
@@ -27,15 +40,8 @@
 .element-detail p strong {
   color: #000;
 }
-.container {
-  display: flex;
-  flex-direction: column; 
-  justify-content: center;
-  align-items: center;
-  height: 100vh; 
-}
 
 .canvas-container {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
+  flex: 1;
 }
-

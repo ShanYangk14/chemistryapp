@@ -1,4 +1,3 @@
-/* PeriodicTable.css */
 .element-legend {
     display: flex;
     flex-wrap: wrap;
@@ -17,78 +16,74 @@
     font-weight: bold;
     border-radius: 5px;
 }
-/* Define the grid layout for the periodic table */
+
 .periodic-table {
     display: grid;
-    grid-template-columns: repeat(18, 1fr); /* Assuming 18 columns for the periodic table */
-    grid-auto-rows: 100px; /* Set a fixed size for each grid row */
-    gap: 10px; /* Increased gap for better separation */
-    padding: 5px; /* Decreased padding */
-    max-width: 1200px; /* Keep max-width to limit the size */
+    grid-template-columns: repeat(18, 1fr);
+    grid-auto-rows: 100px; 
+    gap: 10px; 
+    padding: 5px; 
+    max-width: 1200px; 
     margin: 0 auto;
     position: relative;
-    overflow: auto; /* Allow scrolling for overflow */
+    overflow: auto; 
 }
 
-/* Style for each element in the periodic table */
 .element {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 8px; /* Adjusted padding */
+    padding: 8px; 
     border: 1px solid #aaa;
     text-align: center;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
-    word-wrap: break-word; /* Allow long element names to wrap */
+    word-wrap: break-word; 
 }
 
-/* Hover effect for elements */
 .element:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    
 }
 
-/* Style for the element symbol */
 .symbol {
     font-weight: bold;
-    font-size: 1em; /* Adjusted font size */
+    font-size: 1em; 
 }
 
-/* Style for the element name */
 .name {
-    font-size: 0.4em; /* Adjusted font size */
-    margin-top: 5px; /* Adjusted margin */
-    color: #555;
+    font-size: 0.4em; 
+    margin-top: 5px; 
+    color: snow;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-/* Style for the period and group */
 .period,
 .group {
     position: absolute;
-    font-size: 0.3em; /* Adjusted font size */
+    font-size: 0.3em; 
     bottom: 2px;
     left: 2px;
     color: #555;
 }
 
-.category-alkali-metal { background-color: #FFD700; } /* Golden */
-.category-alkaline-earth-metal { background-color: #6495ED; } /* Cornflower Blue */
-.category-transition-metal { background-color: #CD5C5C; } /* Indian Red */
-.category-lanthanide { background-color: #32CD32; } /* Lime Green */
-.category-actinide { background-color: #8A2BE2; } /* Blue Violet */
-.category-diatomic-nonmetal { background-color: #FF6347; } /* Tomato */
-.category-metalloid { background-color: #FFA500; } /* Orange */
-.category-post-transition-metal { background-color: #00CED1; } /* Dark Turquoise */
-.category-noble-gas { background-color: #d2d222; } /* Yellow */
-.category-polyatomic-nonmetal { background-color: #8B008B; } /* Dark Magenta */
-.category-unknown { background-color: #966C90; } /* Purple Taupe */
+.category-alkali-metal { background-color: #FFD700; } 
+.category-alkaline-earth-metal { background-color: #6495ED; } 
+.category-transition-metal { background-color: #CD5C5C; }
+.category-lanthanide { background-color: #32CD32; } 
+.category-actinide { background-color: #8A2BE2; } 
+.category-diatomic-nonmetal { background-color: #FF6347; } 
+.category-metalloid { background-color: #FFA500; } 
+.category-post-transition-metal { background-color: #00CED1; } 
+.category-noble-gas { background-color: #d2d222; } 
+.category-polyatomic-nonmetal { background-color: #8B008B; } 
+.category-unknown { background-color: #966C90; } 
 
 
 .number {
@@ -99,10 +94,9 @@
 }
 .element-info-panel {
     position: fixed;
-    top: 50%; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
+    top: 50%; 
+    left: 10px; 
     transform: translateY(-50%);
-    /* Additional styling */
 }
 
 

@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; // Import OrbitControls
 
 const AtomModel = ({ atomicNumber }) => {
-  const { scene, camera, gl } = useThree(); // Destructure camera and gl
+  const { scene, camera, gl } = useThree(); 
   const [/*modelLoaded*/, setModelLoaded] = useState(false);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const AtomModel = ({ atomicNumber }) => {
     const loader = new GLTFLoader();
     const modelPath = `/3Dmodels/element_${String(atomicNumber).padStart(3, '0')}_${getElementName(atomicNumber)}.glb`; // Dynamically construct the model path
     let object = null;
-
+   
     loader.load(
       modelPath,
       (gltf) => {
@@ -56,19 +56,17 @@ const AtomModel = ({ atomicNumber }) => {
       }
     );
 
-    // Create OrbitControls
     const controls = new OrbitControls(camera, gl.domElement);
-    controls.enableDamping = true; // Optional: Enables smooth camera movement
-    controls.dampingFactor = 0.25; // Optional: Adjusts the damping factor
+    controls.enableDamping = true; 
+    controls.dampingFactor = 0.25; 
+    controls.minDistance = 10; 
+    controls.maxDistance = 20;
 
-    // Clean up function
     return () => {
-      // Remove the model from the scene
       if (object) {
         scene.remove(object);
       }
 
-      // Dispose OrbitControls
       controls.dispose();
     };
   }, [atomicNumber, camera, gl.domElement, scene]);
@@ -197,7 +195,7 @@ const AtomModel = ({ atomicNumber }) => {
     return elementNames[atomicNumber] || ''; 
   };
 
-  return null; // We don't render anything directly, as the model is added to the scene directly
+  return null; 
 };
 
 export default AtomModel;

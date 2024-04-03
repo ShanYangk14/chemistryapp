@@ -52,7 +52,7 @@ const PeriodicTable = () => {
   return (
     <div>
        <fieldset className="element-legend">
-         <legend>Colors for different element category</legend>
+         <legend>Category</legend>
          <div className="element-color category-alkali-metal">Alkali Metal</div>
          <div className="element-color category-alkaline-earth-metal">Alkaline Earth Metal</div>
          <div className="element-color category-transition-metal">Transition Metal</div>
