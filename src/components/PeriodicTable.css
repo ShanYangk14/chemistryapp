@@ -130,7 +130,12 @@
   }
   @media (max-width: 768px) {
     .periodic-table {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 5px; 
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px; 
     }
-}
+  
+    .element {
+      font-size: 0.6em;
+      padding: 5px;
+    }
+  }
