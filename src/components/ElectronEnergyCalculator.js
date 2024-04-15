@@ -3,7 +3,7 @@ import { calculateEnergy } from './ElectronEnergy.js';
 import './ElectronEnergyCalculator.css';
 import { Link } from 'react-router-dom';
 
-function ElectronEnergyCalculator()  {
+function ElectronEnergyCalculator() {
   const [e, setE] = useState('');
   const [z, setZ] = useState('');
   const [n, setN] = useState('');
@@ -20,8 +20,10 @@ function ElectronEnergyCalculator()  {
 
         const selectedE = e || elements[0].electron_configuration;
 
-        setE(selectedE); 
-        setDefaultE(selectedE); 
+        setE(selectedE);
+        if (!e) {
+          setDefaultE(selectedE); 
+        }
 
         const defaultEnergy = calculateEnergy(selectedE, z, n, l);
         setEnergy(defaultEnergy);
@@ -32,6 +34,10 @@ function ElectronEnergyCalculator()  {
 
     fetchData(); 
   }, [z, n, l, e]); 
+
+  useEffect(() => {
+    setDefaultE(e); 
+  }, [e]);
 
   const handleEChange = (e) => {
     setE(e.target.value);
