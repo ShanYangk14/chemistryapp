@@ -27,6 +27,7 @@
     margin: 0 auto;
     position: relative;
     overflow: auto; 
+    width: 100%; 
 }
 
 .element {
@@ -41,6 +42,7 @@
     transition: all 0.3s ease;
     position: relative;
     word-wrap: break-word; 
+    font-size: 0.8em;
 }
 
 .element:hover {
@@ -126,4 +128,16 @@
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     text-decoration: none;
   }
+  @media (max-width: 768px) {
+    .element {
+      padding: 5px; 
+    }
   
+    .periodic-table {
+      grid-template-columns: repeat(10, 1fr); 
+    }
+  
+    .element:nth-child(n+10):nth-child(-n+18) {
+      order: -1; 
+    }
+  }

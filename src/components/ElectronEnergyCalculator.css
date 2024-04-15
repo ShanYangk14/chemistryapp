@@ -1,78 +1,121 @@
+/* Default styles for all devices */
 .electron-energy-calculator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-    text-decoration-color: #333;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  text-decoration-color: #333;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #333;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-group:nth-child(1) label {
+  width: 50%;
+}
+
+.input-group:nth-child(1) input[type="text"] {
+  width: 100%;
+}
+
+.output-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #e5e5e5;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.output-group p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4CAF50;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dosomething{
+  width: 100%;
+}
+.doshit{
+  width: 65vh;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* Styles for screens smaller than 768px */
+@media (max-width: 768px) {
+  .electron-energy-calculator {
+    padding: 10px;
   }
-  
+
   .input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .input-group label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
   }
-  
+
+  .input-group label {
+    font-size: 14px;
+  }
+
   .input-group input[type="text"],
   .input-group input[type="number"] {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-    font-size: 16px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    font-size: 14px;
   }
-  
-  .input-group:nth-child(1) label {
-    width: 50%;
-  }
-  
-  .input-group:nth-child(1) input[type="text"] {
-    width: 100%;
-  }
-  
+
   .output-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #e5e5e5;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    margin-top: 10px;
+    padding: 5px;
   }
-  
+
   .output-group p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4CAF50;
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
   }
 
   .dosomething{
     width: 100%;
   }
   .doshit{
-    width: 65vh;
+    width: 100%;
   }
 
   .button-container {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    position: static;
+    margin-top: 10px;
   }
+}

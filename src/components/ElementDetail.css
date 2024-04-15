@@ -45,3 +45,26 @@
   margin-bottom: 20px;
   flex: 1;
 }
+
+@media (max-width: 768px) {
+  .element-detail {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .element-detail .info {
+    padding-right: 0;
+  }
+
+  .element-detail h2 {
+    font-size: 24px;
+  }
+
+  .element-detail p {
+    font-size: 16px;
+  }
+
+  .canvas-container {
+    margin-bottom: 10px;
+  }
+}
