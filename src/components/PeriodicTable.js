@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './PeriodicTable.css';
 
 const PeriodicTable = () => {
@@ -65,7 +65,9 @@ const PeriodicTable = () => {
          <div className="element-color category-polyatomic-nonmetal">Polyatomic Nonmetal</div>
          <div className="element-color category-unknown">Unknown</div>
        </fieldset>
-
+       <div className="electron-energy-link">
+        <Link to="/electron-energy-calculator" className="fancy-link">Go to Electron Energy Calculator</Link>
+      </div>
        <div className="periodic-table">
         {Array.isArray(elements) && elements.map(element => (
           <div

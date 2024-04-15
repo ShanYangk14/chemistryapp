@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useThree } from 'react-three-fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; // Import OrbitControls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'; 
 
 const AtomModel = ({ atomicNumber }) => {
   const { scene, camera, gl } = useThree(); 
@@ -12,7 +12,7 @@ const AtomModel = ({ atomicNumber }) => {
     if (!atomicNumber) return;
 
     const loader = new GLTFLoader();
-    const modelPath = `/3Dmodels/element_${String(atomicNumber).padStart(3, '0')}_${getElementName(atomicNumber)}.glb`; // Dynamically construct the model path
+    const modelPath = `/3Dmodels/element_${String(atomicNumber).padStart(3, '0')}_${getElementName(atomicNumber)}.glb`; 
     let object = null;
    
     loader.load(
@@ -35,14 +35,13 @@ const AtomModel = ({ atomicNumber }) => {
         directionalLight.position.set(10, 10, 10);
         scene.add(ambientLight, directionalLight);
 
-        object.position.set(0, 1, 0);
+        object.position.set(0, 0.5, 0);
         object.scale.set(10, 10, 10);
         scene.add(object);
 
         setModelLoaded(true);
         console.log('Loaded GLTF model:', gltf);
 
-        // Start automatic rotation
         const rotationSpeed = 0.01;
         const animate = () => {
           object.rotation.y += rotationSpeed;

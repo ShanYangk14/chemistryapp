@@ -99,5 +99,31 @@
     transform: translateY(-50%);
 }
 
-
+.electron-energy-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .fancy-link {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+  
+  .fancy-link:hover {
+    background-color: #3e8e41;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+  }
   
