@@ -129,15 +129,8 @@
     text-decoration: none;
   }
   @media (max-width: 768px) {
-    .element {
-      padding: 5px; 
-    }
-  
     .periodic-table {
-      grid-template-columns: repeat(10, 1fr); 
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px; 
     }
-  
-    .element:nth-child(n+10):nth-child(-n+18) {
-      order: -1; 
-    }
-  }
+}
