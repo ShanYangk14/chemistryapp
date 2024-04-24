@@ -4,43 +4,39 @@ import './ElectronEnergyCalculator.css';
 import { Link } from 'react-router-dom';
 
 function ElectronEnergyCalculator() {
-  const [e, setE] = useState('');
+  const [selectedElectronConfiguration, setSelectedElectronConfiguration] = useState('');
   const [z, setZ] = useState('');
   const [n, setN] = useState('');
   const [l, setL] = useState('');
   const [energy, setEnergy] = useState(null);
-  const [/*defaultE*/, setDefaultE] = useState('');
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('data.json');
-        const data = await response.json();
-        const elements = data.elements;
-
-        const selectedE = e || elements[0].electron_configuration;
-
-        setE(selectedE);
-        if (!e) {
-          setDefaultE(selectedE); 
-        }
-
-        const defaultEnergy = calculateEnergy(selectedE, z, n, l);
-        setEnergy(defaultEnergy);
+        const response = await fetch('/data.json');
+        const jsonData = await response.json();
+        setData(jsonData);
+        const defaultElement = jsonData.elements[0];
+        setSelectedElectronConfiguration(defaultElement.electron_configuration);
       } catch (error) {
         console.error('Error fetching JSON:', error);
       }
     };
 
-    fetchData(); 
-  }, [z, n, l, e]); 
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    setDefaultE(e); 
-  }, [e]);
+    if (selectedElectronConfiguration && z !== '' && n !== '' && l !== '') {
+      const newEnergy = calculateEnergy(selectedElectronConfiguration, z, n, l);
+      setEnergy(newEnergy);
+    }
+  }, [selectedElectronConfiguration, z, n, l]);
 
-  const handleEChange = (e) => {
-    setE(e.target.value);
+  const handleElectronConfigurationChange = (e) => {
+    const selectedConfig = e.target.value;
+    setSelectedElectronConfiguration(selectedConfig);
   };
 
   const handleZChange = (e) => {
@@ -56,40 +52,45 @@ function ElectronEnergyCalculator() {
   };
 
   return (
-      
-        <div className="electron-energy-calculator">
+    <div className="electron-energy-calculator">
       <h2>Electron Energy calculator</h2>
       <div className="input-group">
-      <label className='doshit'>
+        <label>
           Electron Configuration (E):
-          <input className ="dosomething"type="text" value={e} onChange={handleEChange} maxLength="100" />
+          <select className="dosomething" value={selectedElectronConfiguration} onChange={handleElectronConfigurationChange}>
+            {data && data.elements.map((element) => (
+              <option key={element.electron_configuration} value={element.electron_configuration}>
+                {element.electron_configuration}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
       <div className="input-group">
         <label>
           Atomic Number (Z):
-          <input type="number" value={z} onChange={handleZChange} />
+          <input type="number" value={z} onChange={handleZChange} className="dosomething" />
         </label>
       </div>
       <div className="input-group">
         <label>
           Principal Quantum Number (n):
-          <input type="number" value={n} onChange={handleNChange} />
+          <input type="number" value={n} onChange={handleNChange} className="dosomething" />
         </label>
       </div>
       <div className="input-group">
         <label>
           Angular Momentum Quantum Number (l):
-          <input type="number" value={l} onChange={handleLChange} />
+          <input type="number" value={l} onChange={handleLChange} className="doshit" />
         </label>
       </div>
-      {energy !== null && (
-        <div className="output-group">
-          <p>Energy: {energy}</p>
-        </div>
-      )}
+      <div className="output-group">
+        <p>Energy: {energy !== null ? energy : '---'}</p>
+      </div>
       <div className="button-container">
-        <Link to="/" className="fancy-link">Return to Periodic Table</Link>
+        <Link to="/" className="fancy-link">
+          Return to Periodic Table
+        </Link>
       </div>
     </div>
   );
