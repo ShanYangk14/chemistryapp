@@ -28,16 +28,24 @@ function ElectronEnergyCalculator() {
   }, []);
 
   useEffect(() => {
-    if (selectedElectronConfiguration && z !== '' && n !== '' && l !== '') {
-      const newEnergy = calculateEnergy(selectedElectronConfiguration, z, n, l);
-      setEnergy(newEnergy);
-    }
+    const calculateAndSetEnergy = async () => {
+      try {
+        if (selectedElectronConfiguration && z !== '' && n !== '' && l !== '') {
+          const newEnergy = await calculateEnergy(selectedElectronConfiguration, z, n, l);
+          setEnergy(newEnergy);
+        }
+      } catch (error) {
+        console.error('Error calculating energy:', error);
+      }
+    };
+
+    calculateAndSetEnergy();
   }, [selectedElectronConfiguration, z, n, l]);
 
   const handleElectronConfigurationChange = (e) => {
     const selectedConfig = e.target.value;
-    const atomicNumber = CaculateZ(selectedConfig); 
-    document.getElementById("ZNum").value = atomicNumber;
+    const atomicNumber = CalculateZ(selectedConfig); 
+    setZ(atomicNumber);
     setSelectedElectronConfiguration(selectedConfig);
   };  
 
@@ -53,13 +61,11 @@ function ElectronEnergyCalculator() {
     setL(parseInt(e.target.value));
   };
 
-  function CaculateZ(a) {
-    console.log(typeof a, a);
+  function CalculateZ(a) {
     const energy = a.split(' ').filter(e => e !== '');
     const zNum = energy.reduce((sum, e) => sum + parseInt(e.slice(2, e.length)), 0);
     return zNum;
   }
-  
   
   function SortConfig(a) {
     const energy = a.split(' ').filter(e => e !== '');
@@ -85,7 +91,7 @@ function ElectronEnergyCalculator() {
       <div className="input-group">
         <label>
           Atomic Number (Z):
-          <input type="number" onChange={handleZChange} className="dosomething" readonly id="ZNum"/>
+          <input type="number" value={z} onChange={handleZChange} className="dosomething" readOnly id="ZNum"/>
         </label>
       </div>
       <div className="input-group">
