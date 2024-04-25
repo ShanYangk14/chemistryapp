@@ -36,8 +36,10 @@ function ElectronEnergyCalculator() {
 
   const handleElectronConfigurationChange = (e) => {
     const selectedConfig = e.target.value;
+    const atomicNumber = CaculateZ(selectedConfig); 
+    document.getElementById("ZNum").value = atomicNumber;
     setSelectedElectronConfiguration(selectedConfig);
-  };
+  };  
 
   const handleZChange = (e) => {
     setZ(parseInt(e.target.value));
@@ -51,6 +53,20 @@ function ElectronEnergyCalculator() {
     setL(parseInt(e.target.value));
   };
 
+  function CaculateZ(a) {
+    console.log(typeof a, a);
+    const energy = a.split(' ').filter(e => e !== '');
+    const zNum = energy.reduce((sum, e) => sum + parseInt(e.slice(2, e.length)), 0);
+    return zNum;
+  }
+  
+  
+  function SortConfig(a) {
+    const energy = a.split(' ').filter(e => e !== '');
+    const energySort = energy.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0));
+    return energySort.join(' ');
+  }
+
   return (
     <div className="electron-energy-calculator">
       <h2>Electron Energy calculator</h2>
@@ -60,7 +76,7 @@ function ElectronEnergyCalculator() {
           <select className="dosomething" value={selectedElectronConfiguration} onChange={handleElectronConfigurationChange}>
             {data && data.elements.map((element) => (
               <option key={element.electron_configuration} value={element.electron_configuration}>
-                {element.electron_configuration}
+                {SortConfig(element.electron_configuration)}
               </option>
             ))}
           </select>
@@ -69,7 +85,7 @@ function ElectronEnergyCalculator() {
       <div className="input-group">
         <label>
           Atomic Number (Z):
-          <input type="number" value={z} onChange={handleZChange} className="dosomething" />
+          <input type="number" onChange={handleZChange} className="dosomething" readonly id="ZNum"/>
         </label>
       </div>
       <div className="input-group">

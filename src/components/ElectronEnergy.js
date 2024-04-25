@@ -35,7 +35,7 @@ export function calculateEnergy(a, z, n, l) {
   for (let i = 1; i <= max_n; i++) {
     sumenegy[i] = sumenegy[i - 1] + energy_level[i];
   }
-
+ 
   if (n === 1 && l === 0) {
     let n_l = energy
     .filter(e => e[0] === n.toString()[0] && (e[1] === 's'))
